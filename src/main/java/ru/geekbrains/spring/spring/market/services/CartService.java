@@ -2,8 +2,8 @@ package ru.geekbrains.spring.spring.market.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.geekbrains.spring.spring.market.entities.Product;
-import ru.geekbrains.spring.spring.market.repositories.Cart;
+
+
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CartService {
 
-    private final ProductService productService;
+   /* private final ProductService productService;
     private final Cart cart;
 
 
@@ -32,6 +32,6 @@ public class CartService {
                 cart.deleteProduct(product);
         }
 
-    }
+    }*/
 
 }
