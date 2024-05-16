@@ -1,18 +1,20 @@
+
 server:
   port: 8189
   servlet:
     context-path: /winter
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-market
+    username: root
+    password: as56df
   jpa:
     show-sql: true
+    database: mysql
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
   h2:
     console:
       enabled: true
