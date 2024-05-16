@@ -1,0 +1,25 @@
+
+server:
+  port: 8189
+  servlet:
+    context-path: /winter
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring-market
+    username: root
+    password: as56df
+  jpa:
+    show-sql: true
+    database: mysql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: false
+jwt:
+  secret: F65hgG#*FGF3r45&^SFertD345Sert%FDF#G345j234fguygwe54f87t*Tgf
+  lifetime: 36000000
