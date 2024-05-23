@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!--  подключаем angular.js:-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!--и ДОБАВЛЯЕМ НАШ ФАЙЛ:-->
+    <script src="index.js"></script>
+
+</head>
+
+<body>
+
+<div class="container" ng-controller="indexController">
+    <!-- это выше мы связали вместе файлы js  и html : все,
+    что назодится в этом диве управляется контроллером, который называется indexController   -->
+
+    <h1>Market</h1>
+
+    {{productsList}}
+    <!-- двойные фигурные скобки заставляют обратиться к js- файлу: аннотации $scope -->
+
+    <h3>List of Products</h3>     <!--заголовок 3го уровня-->
+
+
+    <table class="table table-hover" cellpadding="0" cellspacing="0">    <!--идет табличка -->
+        <tr>
+            <td>ID</td>
+            <td>title</td>
+            <td>price</td>
+            <td></td>
+
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in productsList">    <!-- tr - это строка в таблице-->
+            <td>{{p.id}}</td>    <!-- {{}}  - означает обращение к полю id объекта p; две фигурные скобки на это указывают-->
+            <td>{{p.title}}</td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
+            <td>{{p.price}}</td>
+            <td>
+<!--                <button type="button" class="btn btn-primary" ng-click="showProductInfo(p.id)">Info</button>-->
+<!--                <button type="button" class="btn btn-danger" ng-click="deleteProductById(p.id)">Delete</button>-->
+
+                <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Add to Cart</button>
+                <!-- ng-click -- это listener -->
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+
+
+
+        <p></p>
+        <h1>Cart</h1>
+    {{cart}}
+
+        <h3>List of Products in a Cart</h3>     <!--заголовок 3го уровня-->
+
+
+        <table class="table table-hover" cellpadding="0" cellspacing="0">    <!--идет табличка -->
+            <tr>
+                <td>Title</td>
+                <td>Quantity</td>
+                <td>Price</td>
+
+            </tr>
+            <tbody>
+            <tr ng-repeat="item in cart.items">    <!-- tr - это строка в таблице-->
+                <td>{{item.productTitle}}</td>    <!-- {{}}  - означает обращение к полю id объекта p; две фигурные скобки на это указывают-->
+                <td>{{item.quantity}}</td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
+                <td>{{item.pricePerProduct + 'x' + item.quantity + '=' + item.price}}</td>
+                <td> <button type="button" class="btn btn-danger" ng-click="deleteItem(item.id)">Delete</button></td>
+                </tr>
+
+
+                <tr>
+                <td>Totally</td>
+                <td></td>
+                <td>{{cart.totalPrice}}</td>
+                    <td>
+                    <button type="button" class="btn btn-danger" ng-click="deleteFromCart(cart)">DeleteAll</button>
+                    </td>
+
+               </tr>
+
+        <!--
+                    <td>
+                        <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Delete</button>
+                    </td>
+                               добавили пустой столбец, чтобы производить в нем действие, а также кнопку Удалить, окрашенную в красный цвет
+                                Двойные фигурные скобки - это ссылка на переменную в scope  ng-click  -- это аналог Листенера -->
+        <!-- <td>
+            <button class="btn btn-danger" ng-click="findProduct(p.title)">FindProduct</button>
+        </td>
+        <td>
+            <button class="btn btn-danger" ng-click="findProductByTitle(text)">FindProductByTitle</button>
+
+        </td>
+    </tr> -->
+        </tbody>
+    </table>
+    <!--
+        <p></p>
+        <h3>Add a product via JSON</h3>
+
+        <form novalidate ng-submit="createProductJson()">
+            <input type = "text" class="form-control" placeholder="Title" ng-model="newProductJson.title">
+            <p></p>
+            <input type = "number" class="form-control" placeholder="Mark" ng-model="newProductJson.mark">
+            <p></p>
+            <button type ="submit" class="btn btn-primary">Keep Product's JSON</button>
+        </form> -->
+
+
+</div>
+
+</body>
+</html>
