@@ -29,7 +29,7 @@ angular.module('app',[]).controller('indexController',function($scope,$http){
         });
         }
 
-        /*PPP   HOMETASK*/
+
         $scope.addToCart = function(productId){
 
         $http.get('http://localhost:8189/winter/api/v1/cart/add/'+productId).then(function(response){
@@ -38,14 +38,22 @@ angular.module('app',[]).controller('indexController',function($scope,$http){
         });
         }
 
-        $scope.deleteFromCart = function(productId){
+        $scope.deleteItem = function(productId){
 
         $http.delete('http://localhost:8189/winter/api/v1/cart/delete/'+productId).then(function(response){
 
         $scope.loadCart();
-
+             });
         }
 
+
+         $scope.deleteFromCart = function(){
+
+                $http.delete('http://localhost:8189/winter/api/v1/cart/delete').then(function(response){
+
+                $scope.loadCart();
+                       });
+                }
 
 
 
@@ -53,7 +61,7 @@ angular.module('app',[]).controller('indexController',function($scope,$http){
 
                 $http.get('http://localhost:8189/winter/api/v1/cart').then(function(response){
 
-                $scope.cartList = response.data;
+                $scope.cart = response.data;
 
                 });
                 }

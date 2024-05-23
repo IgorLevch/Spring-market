@@ -2,10 +2,12 @@ package ru.geekbrains.spring.spring.market.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @Table(name="roles")
+@NoArgsConstructor
 public class Role {
 
     @Id

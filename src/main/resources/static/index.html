@@ -44,43 +44,51 @@
             <td>{{p.title}}</td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
             <td>{{p.price}}</td>
             <td>
-                <button type="button" class="btn btn-primary" ng-click="showProductInfo(p.id)">Info</button>
-                <button type="button" class="btn btn-danger" ng-click="deleteProductById(p.id)">Delete</button>
-<!--                PPP  HOMETASK-->
-                <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Cart</button>
+<!--                <button type="button" class="btn btn-primary" ng-click="showProductInfo(p.id)">Info</button>-->
+<!--                <button type="button" class="btn btn-danger" ng-click="deleteProductById(p.id)">Delete</button>-->
+
+                <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Add to Cart</button>
                 <!-- ng-click -- это listener -->
             </td>
         </tr>
 
+        </tbody>
+    </table>
 
 
-        <!--                PPP  HOMETASK/// Это список товаров  в корзине -->
-        </table>
 
+
+        <p></p>
         <h1>Cart</h1>
-    {{cartList}}
+    {{cart}}
 
         <h3>List of Products in a Cart</h3>     <!--заголовок 3го уровня-->
 
 
         <table class="table table-hover" cellpadding="0" cellspacing="0">    <!--идет табличка -->
             <tr>
-                <td>ID</td>
-                <td>title</td>
-                <td>price</td>
-                <td></td>
+                <td>Title</td>
+                <td>Quantity</td>
+                <td>Price</td>
 
             </tr>
             <tbody>
-            <tr ng-repeat="p in cartList">    <!-- tr - это строка в таблице-->
-                <td>{{p.id}}</td>    <!-- {{}}  - означает обращение к полю id объекта p; две фигурные скобки на это указывают-->
-                <td>{{p.title}}</td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
-                <td>{{p.price}}</td>
-                <td>
+            <tr ng-repeat="item in cart.items">    <!-- tr - это строка в таблице-->
+                <td>{{item.productTitle}}</td>    <!-- {{}}  - означает обращение к полю id объекта p; две фигурные скобки на это указывают-->
+                <td>{{item.quantity}}</td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
+                <td>{{item.pricePerProduct + 'x' + item.quantity + '=' + item.price}}</td>
+                <td> <button type="button" class="btn btn-danger" ng-click="deleteItem(item.id)">Delete</button></td>
+                </tr>
 
-                    <button type="button" class="btn btn-danger" ng-click="deleteFromCart(p.id)">Delete</button>
 
-                </td>
+                <tr>
+                <td>Totally</td>
+                <td></td>
+                <td>{{cart.totalPrice}}</td>
+                    <td>
+                    <button type="button" class="btn btn-danger" ng-click="deleteFromCart(cart)">DeleteAll</button>
+                    </td>
+
                </tr>
 
         <!--

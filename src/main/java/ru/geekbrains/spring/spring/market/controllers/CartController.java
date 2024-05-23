@@ -1,10 +1,8 @@
 package ru.geekbrains.spring.spring.market.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.geekbrains.spring.spring.market.dtos.Cart;
 import ru.geekbrains.spring.spring.market.entities.Product;
 
 import ru.geekbrains.spring.spring.market.services.CartService;
@@ -18,32 +16,30 @@ public class CartController {
 
     private final CartService cartService;
 
-/*
-    @GetMapping
-    public List<Cart> findAllProducts(){   // или оставить Product ?
-
-        return cartService.findAll();
-    }
-
-
-
     @GetMapping("/add/{id}")
-    public List<Product> findProductById(@PathVariable Long id){
-
-        cartService.addtoDB(id);
-
-        return cartService.findAll();
-
+    public void addToCart(@PathVariable Long id){
+        cartService.add(id);
     }
 
 
-    @GetMapping("/delete/{id}")
-    void deleteById(@PathVariable Long id){
-
-           cartService.deleteById(id);
+    @GetMapping
+    public Cart getCurrentCart(){
+        return cartService.getCurrentCart();
     }
-*/
 
 
+    @DeleteMapping("/delete")
+    public void  delete(){
+
+     cartService.delete();
+
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteProductById(@PathVariable Long id){
+
+        cartService.deleteById(id);
+
+    }
 
 }
