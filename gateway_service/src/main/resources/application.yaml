@@ -3,17 +3,10 @@ server:
   # есть файл с объяснением всех строк этого конфига
 spring:
   application:
-    name: gateway-service
+    name: gateway_service
   cloud:
     gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins:  "http://localhost:3000"
-            allowedMethods:
-              -GET
-              -POST
-            allowedHeaders:  "*"
+
       routes:
         - id: core_service
           uri: http://localhost:8189/
