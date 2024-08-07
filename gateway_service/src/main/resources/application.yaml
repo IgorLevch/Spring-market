@@ -1,0 +1,38 @@
+server:
+  port: 5555
+  # есть файл с объяснением всех строк этого конфига
+spring:
+  application:
+    name: gateway_service
+  cloud:
+    gateway:
+
+      routes:
+        - id: core_service
+          uri: http://localhost:8189/
+          predicates:
+            - Path=/core/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/winter-market-core
+            - JwtAuthFilter
+        - id: cart_service
+          uri: http://localhost:8190/
+          predicates:
+            - Path=/cart/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/winter-market-carts
+            - JwtAuthFilter
+        - id: auth_service
+          uri: http://localhost:8188/
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/winter-market-auth
+            - JwtAuthFilter
+
+
+jwt:
+  secret: F65hgG#*FGF3r45&^SFertD345Sert%FDF#G345j234fguygwe54f87t*Tgf
