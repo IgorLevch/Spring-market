@@ -1,0 +1,10 @@
+server:
+  port: 0
+  servlet:
+    context-path: /winter-market-carts
+integrations:
+  product-service:
+    url: http://localhost:0/winter-market-core/
+    read-timeout: 10000
+    write-timeout: 5000
+    connect-timeout: 5000
