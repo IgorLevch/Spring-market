@@ -55,7 +55,7 @@ public class AppConfig {
 
         //         integrations:
         // product-service:
-        //   url: http://localhost:8189/winter/
+        //   url: http://localhost:0/winter/
         //   read-timeout: 10000    --    это 10 секунд
         //   write-timeout: 5000    --- это 5 секунд
         //   connect-teimeout: 5000

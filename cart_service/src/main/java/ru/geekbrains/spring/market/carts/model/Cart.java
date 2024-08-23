@@ -3,6 +3,8 @@ package ru.geekbrains.spring.market.carts.model;
 import lombok.Data;
 import ru.geekbrains.spring.market.api.ProductDto;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
 public class Cart {
 
     private List<CartItem> items;
-    private int totalPrice;  // общая стоимость корзины
+    private BigDecimal totalPrice;  // общая стоимость корзины
 
 
     // это мы делаем запрет того, чтобы кто-то снаружи мог получить данный список и как-то подменить его:
@@ -35,10 +37,10 @@ public class Cart {
 
     // приватный метод пересчета стоимости:
     private void recalculate(){
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
 
         for (CartItem cartItem : items){
-            totalPrice +=cartItem.getPrice();
+            totalPrice =totalPrice.add(cartItem.getPrice()).setScale(2, RoundingMode.HALF_UP);
 
         }
     }
