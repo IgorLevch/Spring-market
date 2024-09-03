@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="market">
+
+<head>
+    <meta charset="UTF-8">
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+    <!--    это библиотека-маршрутизатор на фронте-->
+
+
+      <!--  подключаем angular.js:-->
+
+
+</head>
+
+<body>
+
+<div class="container" ng-controller="indexController">
+    <!-- это выше мы связали вместе файлы js  и html : все, что назодится в этом диве управляется контроллером, который называется indexController   -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/"> Spring Market</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/store"> List of products</a>
+                </li>
+<!--это выше мы говорим, что если пойдем по адресу store, то попадем в каталог товаров -->
+<!--                #!/store - это специальная стр-ра адресации в ангуляр.js-->
+                <li class="nav-item">
+                    <a class="nav-link" href="#!/cart">Cart</a>
+                </li>
+                <!--это выше мы говорим, что если пойдем по адресу cart, то попадем в корзину  -->
+
+                <li class="nav-item" ng-show="!isUserLoggedIn()">
+                    <form class="align-middle" ng-submit="tryToAuth()">
+                        <div class="input-group input-group sa">
+                            <!-- еще тут было style="..." 1/56/20 - timing -->
+                            <input id = "navLoginField"  class = "form-control" ng-model="user.username" type="text"
+                                   aria-describedby="inputGroup-sizing-sa" >
+                            <!-- еще тут было style="..." 1/56/20 - timing -->
+
+                            <input id = "navPasswordField" class="form-control" ng-model="user.password" type="password"
+                                   aria-describedby="inputGroup-sizing-sa"  >
+                            <!-- еще тут было style="..." 1/56/20 - timing -->
+
+                            <button id = "navLoginSubmit" class="btn btn-outline-warning btn-sa"
+                                    type="submit">Войти
+                                <!-- еще тут было style="..." 1/56/20 - timing -->
+                            </button>
+                        </div>
+                    </form>
+                </li>
+                <li class="nav-item"  ng-show="isUserLoggedIn()">
+                    <!-- еще тут было style="..." 1/56/20 - timing -->
+                    <button class="btn btn-outline-secondary btn-sa" ng-click="tryToLogout()">Выйти</button>
+                </li>
+
+
+            </ul>
+        </div>
+    </nav>
+
+    <ng-view></ng-view>
+
+    <script src="index.js"></script>
+    <script src="store/store.js"></script>
+    <script src="cart/cart.js"></script>
+    <script src="welcome/welcome.js"></script>
+
+
+<!--    {{productsList}}-->
+<!--    &lt;!&ndash; двойные фигурные скобки заставляют обратиться к js- файлу: аннотации $scope &ndash;&gt;-->
+
+
+
+
+<!--    {{cart}}-->
+
+
+
+    <!--
+                <td>
+                    <button class="btn btn-danger" ng-click="deleteProduct(p.id)">Delete</button>
+                </td>
+                           добавили пустой столбец, чтобы производить в нем действие, а также кнопку Удалить, окрашенную в красный цвет
+                            Двойные фигурные скобки - это ссылка на переменную в scope  ng-click  -- это аналог Листенера -->
+    <!-- <td>
+        <button class="btn btn-danger" ng-click="findProduct(p.title)">FindProduct</button>
+    </td>
+    <td>
+        <button class="btn btn-danger" ng-click="findProductByTitle(text)">FindProductByTitle</button>
+
+    </td>
+</tr> -->
+
+
+
+
+    <!--
+        <p></p>
+        <h3>Add a product via JSON</h3>
+
+        <form novalidate ng-submit="createProductJson()">
+            <input type = "text" class="form-control" placeholder="Title" ng-model="newProductJson.title">
+            <p></p>
+            <input type = "number" class="form-control" placeholder="Mark" ng-model="newProductJson.mark">
+            <p></p>
+            <button type ="submit" class="btn btn-primary">Keep Product's JSON</button>
+        </form> -->
+
+
+</div>
+
+</body>
+</html>

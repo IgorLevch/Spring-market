@@ -23,6 +23,7 @@ mvn
 *.iws
 *.iml
 *.ipr
+.mvn/wrapper
 
 ### NetBeans ###
 /nbproject/private/
