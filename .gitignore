@@ -8,6 +8,7 @@ mvn
 .mvn
 !**/src/main/**/target/
 !**/src/test/**/target/
+mvn/wrapper
 
 ### STS ###
 .apt_generated
@@ -23,6 +24,7 @@ mvn
 *.iws
 *.iml
 *.ipr
+
 .mvn/wrapper
 
 ### NetBeans ###
@@ -37,3 +39,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/.mvn/
+/.mvn/wrapper/
