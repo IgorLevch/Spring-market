@@ -1,0 +1,6 @@
+integrations:
+  cart-service:
+    url: http://localhost:8100/wiremock/carts/
+    read-timeout: 10000
+    write-timeout: 20000
+    connect-timeout: 10000

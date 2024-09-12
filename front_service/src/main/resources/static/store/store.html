@@ -1,0 +1,31 @@
+<div>
+    <p></p>
+    <h3>List of products</h3>
+    <p></p>
+
+    <table class="table table-hover" cellpadding="0" cellspacing="0">    <!--идет табличка -->
+        <tr>
+            <td>ID</td>
+            <td>title</td>
+            <td>price</td>
+            <td></td>
+
+        </tr>
+        <tbody>
+        <tr ng-repeat="p in productsList">    <!-- tr - это строка в таблице-->
+            <td>{{p.id}}</td>    <!-- {{}}  - означает обращение к полю id объекта p; две фигурные скобки на это указывают-->
+            <td>{{p.title}}</td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
+            <td>{{p.price}}</td>
+            <td>
+                <!-- <button type="button" class="btn btn-primary" ng-click="showProductInfo(p.id)">Info</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteProductById(p.id)">Delete</button>  -->
+                <button type="button" class="btn btn-primary" ng-click="addToCart(p.id)">Add to Cart</button>
+                <!-- ng-click -- это listener -->
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+</div>
