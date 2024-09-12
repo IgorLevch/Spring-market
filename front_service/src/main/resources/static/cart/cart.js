@@ -5,7 +5,7 @@ angular.module('market').controller('cartController', function($scope, $http, $l
 
         $scope.loadCart = function(){
 
-            $http.get(contextPath + 'api/v1/cart').then(function(response){
+            $http.get(contextPath + 'api/v1/cart' + $localStorage.winterMarketGuestCartId).then(function(response){
 
             $scope.cart = response.data;
 
@@ -15,7 +15,7 @@ angular.module('market').controller('cartController', function($scope, $http, $l
 
         $scope.deleteFromCart = function(){
 
-        $http.get(contextPath +'api/v1/cart/delete').then(function(response){
+        $http.get(contextPath +'api/v1/cart/' + $localStorage.winterMarketGuestCartId + '/delete').then(function(response){
 
              $scope.loadCart();
              });
@@ -24,7 +24,7 @@ angular.module('market').controller('cartController', function($scope, $http, $l
 
         $scope.deleteItem = function(productId){
 
-              $http.get(contextPath +'api/v1/cart/delete/'+productId).then(function(response){
+              $http.get(contextPath +'api/v1/cart/' + $localStorage.winterMarketGuestCartId + '/delete/'+productId).then(function(response){
 
               $scope.loadCart();
               });

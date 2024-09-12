@@ -13,7 +13,7 @@ import ru.geekbrains.spring.market.core.repositories.OrderItemRepository;
 import ru.geekbrains.spring.market.core.repositories.OrderRepository;
 
 
-
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,7 +29,7 @@ public class OrderService {
     @Transactional
     public Order createOrder(String username){
 
-    CartDto cartDto = cartServiceIntegration.getCurrentCart();// получаем корзину из Карт МС
+    CartDto cartDto = cartServiceIntegration.getCurrentCart(username);// получаем корзину из Карт МС
     Order order = new Order();
     order.setUsername(username);
     order.setTotalPrice(cartDto.getTotalPrice());
@@ -47,9 +47,16 @@ public class OrderService {
 
 
     orderRepository.save(order);
-        cartServiceIntegration.clear();
+        cartServiceIntegration.clear(username);
         return order;
 
+
+    }
+
+
+    public List<Order>  findByUsername(String username){
+
+        return orderRepository.findByUsername(username);
 
     }
 

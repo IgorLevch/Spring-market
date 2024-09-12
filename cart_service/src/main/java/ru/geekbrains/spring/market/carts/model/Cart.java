@@ -18,19 +18,26 @@ public class Cart {
 
     // это мы делаем запрет того, чтобы кто-то снаружи мог получить данный список и как-то подменить его:
     // и это метод поиска айтимов:
-    public List<CartItem>  getItems(){
-        return Collections.unmodifiableList(items);
-    }
+//    public List<CartItem>  getItems(){
+//        return Collections.unmodifiableList(items);
+//    }
 
 
     public Cart(){
-        this.items = new ArrayList<CartItem>();
+        this.items = new ArrayList<>();
 
     }
 
 
     // добавление продуктов в корзину:
-    public void add(ProductDto product){ // TODO доработать в ДЗ
+    public void add(ProductDto product){
+        for (CartItem item : items){
+            if (product.getId().equals(item.getProductId())) {
+                item.changeQuantity(1);
+                recalculate();
+                return;
+            }
+        }
         items.add(new CartItem(product.getId(), product.getTitle(), 1, product.getPrice(), product.getPrice()));
         recalculate();
     }
@@ -46,11 +53,14 @@ public class Cart {
     }
     public void deleteAll(){
         items.clear();
+        totalPrice =BigDecimal.ZERO;
     }
 
     public void deleteById(Long id){
 
-        items.remove(id);
+       if (items.removeIf(item ->item.getProductId().equals(id))){
+           recalculate();
+       }
     }
 
 

@@ -3,9 +3,11 @@ package ru.geekbrains.spring.market.carts.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ru.geekbrains.spring.market.api.CartDto;
+import ru.geekbrains.spring.market.api.StringResponse;
 import ru.geekbrains.spring.market.carts.converters.CartConverter;
 import ru.geekbrains.spring.market.carts.services.CartService;
 
+import java.util.UUID;
 
 
 @RestController
@@ -22,30 +24,51 @@ public class CartController {
     private final CartService cartService;
     private final CartConverter cartConverter;
 
-    @GetMapping("/add/{id}")
-    public void addToCart(@PathVariable Long id){
-        cartService.add(id);
+
+    @GetMapping("/generate_uuid")  // фронт генерит для себя айдишники корзин
+    public StringResponse generateUuid(){
+                                            // это если если не приходит uuid с фронта:
+        return new StringResponse(UUID.randomUUID().toString());
+    }
+
+    @GetMapping("/{uuid}/add/{id}")
+    public void addToCart(@RequestHeader(name = "username", required = false) String username,  @PathVariable String uuid, @PathVariable Long id){
+
+        String targetUuid = getCartUuid(username, uuid);
+        cartService.add(targetUuid, id); // если приходят username и uuid корзины,то у username - приоритет выше.
     }
 
 
-    @GetMapping
-    public CartDto getCurrentCart(){
-        return cartConverter.entityToDto(cartService.getCurrentCart());
+    @GetMapping("/{uuid}")
+    public CartDto getCurrentCart(@RequestHeader(name = "username", required = false) String username, @PathVariable String uuid){
+
+        String targetUuid = getCartUuid(username, uuid);
+        return cartConverter.entityToDto(cartService.getCurrentCart(targetUuid));
     }
 
 
-    @DeleteMapping("/delete")
-    public void  delete(){
-
-     cartService.delete();
-
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteProductById(@PathVariable Long id){
-
-        cartService.deleteById(id);
+    @GetMapping("/{uuid}/delete")
+    public void  delete(@RequestHeader(name = "username", required = false) String username, @PathVariable String uuid){
+        String targetUuid = getCartUuid(username, uuid);
+     cartService.delete(targetUuid);
 
     }
 
+    @GetMapping("/{uuid}/delete/{id}")
+    public void deleteProductById(@RequestHeader(name = "username", required = false) String username, @PathVariable String uuid, @PathVariable Long id){
+
+        String targetUuid = getCartUuid(username, uuid);
+        cartService.deleteById(targetUuid, id);
+
+    }
+
+    // кастомный метод (из контрллера лучше убрать )
+        private String getCartUuid(String username, String uuid){
+            if (username != null){
+                return username;
+            } else {
+                return uuid;
+            }
+
+        }
 }

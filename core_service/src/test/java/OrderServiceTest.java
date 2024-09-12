@@ -54,7 +54,7 @@ public class OrderServiceTest {
         // выше мы сформировали некую тестовую корзину ( ее не существует, но мы ее придумали для теста)
 
 
-        Mockito.doReturn(cartDto).when(cartServiceIntegration).getCurrentCart();  // Mockito - библиотека для создания заглушек
+        Mockito.doReturn(cartDto).when(cartServiceIntegration).getCurrentCart(null);  // Mockito - библиотека для создания заглушек
         //и выше мы говорим: Mockito - давай, ты нам вернешь cartDto, когда мы у нашего объекта , у cartServiceIntegration, вызовем
         // метод getCurrentCart()
 

@@ -41,6 +41,10 @@
                 </li>
                 <!--это выше мы говорим, что если пойдем по адресу cart, то попадем в корзину  -->
 
+                <li class="nav-item" ng-show="isUserLoggedIn()">
+                    <a class="nav-link" href="#!/orders">My orders</a>
+                </li>
+
                 <li class="nav-item" ng-show="!isUserLoggedIn()">
                     <form class="align-middle" ng-submit="tryToAuth()">
                         <div class="input-group input-group sa">
@@ -60,6 +64,11 @@
                         </div>
                     </form>
                 </li>
+                <li class="nav-item" ng-show="!isUserLoggedIn()">
+                    <a class="nav-link" href="#!/registration">Registration</a>
+                </li>
+
+
                 <li class="nav-item"  ng-show="isUserLoggedIn()">
                     <!-- еще тут было style="..." 1/56/20 - timing -->
                     <button class="btn btn-outline-secondary btn-sa" ng-click="tryToLogout()">Выйти</button>
@@ -75,7 +84,9 @@
     <script src="index.js"></script>
     <script src="store/store.js"></script>
     <script src="cart/cart.js"></script>
+    <script src="orders/orders.js"></script>
     <script src="welcome/welcome.js"></script>
+    <script src="registration/registration.js"></script>
 
 
 <!--    {{productsList}}-->

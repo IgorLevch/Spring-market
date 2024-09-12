@@ -15,11 +15,13 @@ public class CartServiceIntegration {
     private final WebClient cartServiceWebClient;
 
 
-    public CartDto getCurrentCart(){
+    public CartDto getCurrentCart(String username){
 
         return cartServiceWebClient.get()
-                .uri("api/v1/cart")
+                .uri("api/v1/cart/0")// нулем мы занулили uuid. Мы говорим. что мы уверены, что корзина будет запрашиваться по нашему имени, а не по айдишнику
                 // все, что идет до retrieve - конфигурирование нашего запроса (можем тело насторить, хедеры добавить, куки добавить и т.д.)
+                .header("username", username )  //это мы юзернейм прокидываем в корзиновый сервис
+
                 .retrieve()  //отправляем запрос и хотим получить ответ
                 .bodyToMono(CartDto.class) //если не пришло никаких непонятных объектов (см. onStatus), то мы преобразуем тело ответа к классу
                 // в скобках (к классу ProductDto)
@@ -34,9 +36,11 @@ public class CartServiceIntegration {
 
 
 
-    public void clear(){
+    public void clear(String username){
         cartServiceWebClient.get()  //   мы посылаем гет запрос
-                .uri("/api/v1/cart/delete") // ендпойнт к нашему uri
+                .uri("/api/v1/cart/0/delete") // ендпойнт к нашему uri
+                .header("username", username )  //это мы юзернейм прокидываем в корзиновый сервис
+
                 .retrieve()  // вернет асинхронный вариант
                 .toBodilessEntity() //это просто дождаться ответа без тела (если мы знаем, что в ответе не будет никакого текста или важной инфо)
                 //    это противоположность .bodyToMono

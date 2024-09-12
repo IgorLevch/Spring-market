@@ -4,7 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import ru.geekbrains.spring.market.api.OrderDto;
+import ru.geekbrains.spring.market.core.converters.OrderConverter;
 import ru.geekbrains.spring.market.core.services.OrderService;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -15,6 +20,7 @@ public class OrderController {
 
 
     private final OrderService orderService;
+    private  final OrderConverter orderConverter;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -29,6 +35,15 @@ public class OrderController {
 
 
     }
+
+    @GetMapping
+    public List<OrderDto>  getUserOrders(@RequestHeader String username){
+
+        return orderService.findByUsername(username).stream().map(orderConverter::entityToDto).collect(Collectors.toList());
+
+    }
+
+
 
 
 }

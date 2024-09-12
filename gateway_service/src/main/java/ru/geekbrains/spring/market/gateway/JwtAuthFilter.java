@@ -32,6 +32,14 @@ public class JwtAuthFilter extends AbstractGatewayFilterFactory<JwtAuthFilter.Co
     public GatewayFilter apply(Config config) {
         return (exchange, chain) ->{
             ServerHttpRequest request = (ServerHttpRequest) exchange.getRequest();  // получаем ссылку на запрос, который сквозь нас пролетает
+
+            if (request.getHeaders().containsKey("username")){
+                return this.onError(exchange, "Authorization header is invalid", HttpStatus.BAD_GATEWAY);
+
+            }
+
+
+
             if (!isAuthMissing(request)) { // если в запросе есть headerAuthorization
                 final String token = getAuthHeader(request); // то мы из запроса выдергиваем Хедер Authorization (без слова Беарер)
                 // это мы по сути выше выдернули токен из заголовка Ауторизейшн

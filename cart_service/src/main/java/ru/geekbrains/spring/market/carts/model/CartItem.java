@@ -22,4 +22,12 @@ public class CartItem {
     private BigDecimal price;     // общая стоимость
 
 
+    public void changeQuantity(int delta){
+        quantity += delta;
+        price = pricePerProduct.multiply(BigDecimal.valueOf(quantity));
+
+    }
+
+
+
 }

@@ -33,10 +33,20 @@
 
                         })
             .when('/orders', {
+                              templateUrl: 'orders/orders.html',
+                              controller:  'orders  Controller'
+
+                             })
+            .when('/orders', {
                             templateUrl: 'orders/orders.html',
                             controller:  'ordersController'
 
                         })
+             .when('/registration', {
+                            templateUrl: 'registration/registration.html',
+                            controller:  'registrationController'
+
+                         })
             .when('/order_pay/:orderId', {
                             templateUrl: 'order_pay/order_pay.html',
                             controller:  'orderPayController'
@@ -65,9 +75,23 @@
 
                $http.defaults.headers.common.Authorization = 'Bearer '  + $localStorage.winterMarketUser.token;
            }  // присвоение токена
-}
 
-})();
+//        говорим, что если у нашего фронта  нет в локальном хранилище браузера записи с ключом winterMarketGuestCartId):
+//то мы говорим, давайте мы пошлем запрос на бек:   'http://localhost:5555/cart/api/v1/cart/generate_uuid'
+//  и мы знаем, что нам сгенерится какой-то айдишник
+// и мы его просто запомним: data value
+//итого, это получение айдишника при запуске:
+
+           if(!$localStorage.winterMarketGuestCartId){
+           $http.get('http://localhost:5555/cart/api/v1/cart/generate_uuid')
+                .then(function successCallback(response){
+                $localStorage.winterMarketGuestCartId = response.data.value;
+                });
+
+           }
+        }
+
+    })();
 
 
 // индекс контролллер (управлялка навигационной панельки):
