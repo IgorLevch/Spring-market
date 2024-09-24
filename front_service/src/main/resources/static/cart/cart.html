@@ -1,0 +1,45 @@
+<div>
+    <p></p>
+    <h3>List of Products in a Cart</h3>     <!--заголовок 3го уровня-->
+
+    <p></p>
+
+
+
+
+    <table class="table table-hover" cellpadding="0" cellspacing="0">    <!--идет табличка -->
+        <tr>
+            <td>Title</td>
+            <td>Quantity</td>
+            <td>Price</td>
+            <td></td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="item in cart.items">    <!-- tr - это строка в таблице-->
+            <td>{{item.productTitle}}</td>    <!-- {{}}  - означает обращение к полю id объекта p; две фигурные скобки на это указывают-->
+            <td>{{item.quantity}}</td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
+            <td>{{item.pricePerProduct + 'x' + item.quantity + '=' + item.price}}</td>
+            <td> <button type="button" class="btn btn-danger" ng-click="deleteItem(item.id)">Delete</button></td>
+            <!-- <td>
+
+                <button type="button" class="btn btn-danger" ng-click="deleteFromCart(p.id)">Delete</button>
+
+            </td> -->
+        </tr>
+        <tr>
+            <td>Totally</td>
+            <td></td>    <!--  ng-repeat  - это цикл foreach в ангуляре-->
+            <td>{{cart.totalPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <button type="button" class="btn btn-secondary" ng-click="deleteFromCart()">DeleteAll</button>
+    <p></p>
+    <button type="button" class="btn btn-primary" ng-click="createOrder()">Checkout</button>
+
+
+
+
+</div>
